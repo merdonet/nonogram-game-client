@@ -1,6 +1,3 @@
-const list_1: number[] = [1, 1, 0, 1, 0, 0, 1, 1, 1, 1];
-const list2: number[] = [1, 1, 1, 1, 0, 0, 1, 1, 1, 1];
-
 let sum = 0;
 const columnSummary = (list: number[]) => {
   //   console.log(list);

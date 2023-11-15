@@ -1,22 +1,16 @@
 <template>
-  <div>
-    <v-btn
-      class="cell pa-0"
-      flat
-      variant="outlined"
-      :class="borderColor"
-      rounded="false"
-      @click="onClick"
-    >
+  <div class="ma-16">
+    <v-btn class="cell pa-0" flat variant="outlined" :class="borderColor" rounded="false" @click="onClick">
       <v-icon :icon="cellStatusIcon" size="3rem"></v-icon>
     </v-btn>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { CellStatus } from "../types/cellTypes";
 import { PropType, computed } from "vue";
-import { useNonoStore } from "../../../store/nonoStore";
+// import { useNonoStore } from "../../../store/nonoStore";
 
 const props = defineProps({
   success: {
@@ -31,12 +25,12 @@ const props = defineProps({
 
 const emit = defineEmits(["clicked"]);
 
-useNonoStore();
+// useNonoStore();
 
 const cellStatusIcon = computed(() => {
   if (props.status) return "mdi-square";
   if (props.status == false) return "mdi-close";
-  return null;
+  return undefined;
 });
 
 const borderColor = props.success == true ? "cell-success" : "cell-error";
@@ -50,9 +44,11 @@ const onClick = () => emit("clicked", props.status);
   min-height: 50px;
   border-width: 2px;
 }
+
 .cell-error {
   border-color: red;
 }
+
 .cell-success {
   border-color: black;
 }

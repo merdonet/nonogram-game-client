@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { columnSummary, compare } from "./columnSummary";
 
 const list = [1, 1, 0, 1, 0, 0, 1, 1, 1, 1];
