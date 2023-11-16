@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // import HelloWorld from './components/HelloWorld.vue'
-import { CellComponent } from "./components/nonogram";
-import { CellLine } from "./components/nonogram";
+import { CellComponent, CellLine } from "./components/nonogram";
+
 </script>
 
 <template>

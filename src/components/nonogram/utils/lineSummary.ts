@@ -1,6 +1,5 @@
-let sum = 0;
-const columnSummary = (list: number[]) => {
-  //   console.log(list);
+const lineSummary = (list: number[]) => {
+  let sum = 0;
   return list.reduce((acc: number[], item, index, arr) => {
     if (item === 1) sum++;
     if (item === 0 && sum !== 0) {
@@ -25,4 +24,4 @@ const compare = (list1: number[], list2: number[]) => {
   return result;
 };
 
-export { columnSummary, compare };
+export { lineSummary, compare };

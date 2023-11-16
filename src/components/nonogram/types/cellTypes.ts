@@ -1,3 +1,3 @@
 type CellStatus = boolean | null;
 
-export { CellStatus };
+export type { CellStatus };
