@@ -24,4 +24,14 @@ const compare = (list1: number[], list2: number[]) => {
   return result;
 };
 
-export { lineSummary, compare };
+const maxSummaryLength = (list: number[][]): number => {
+  let maxLength = 0;
+
+  list.forEach((line) => {
+    const lineSum: number[] = lineSummary(line);
+    if (lineSum.length > maxLength) maxLength = lineSum.length;
+  });
+  return maxLength;
+};
+
+export { lineSummary, compare, maxSummaryLength };

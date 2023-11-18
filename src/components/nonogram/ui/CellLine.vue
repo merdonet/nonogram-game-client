@@ -2,7 +2,7 @@
     <template v-for="item in puzzleHeight">
         <div class="d-flex flex-row">
             <div class="flex-row-reverse mr-1">
-                <LineSummary :line="puzzleLine(item - 1)" />
+                <LineSummary :line="puzzleLine(item - 1)" :maxCellCount="maxSummaryLine" />
             </div>
             <div>
                 <template v-for="cell in puzzleLine(item - 1)">
@@ -19,6 +19,6 @@ import { LineSummary } from "..";
 import { useNonoStore } from "../../../store/nonoStore";
 
 
-const { puzzleLine, puzzleHeight } = useNonoStore()
+const { puzzleLine, puzzleHeight, maxSummaryLine } = useNonoStore()
 
 </script>

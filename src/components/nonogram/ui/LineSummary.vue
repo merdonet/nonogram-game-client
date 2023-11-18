@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-row align-center">
+    <div class="d-flex align-center" :class="directionClass">
         <template v-for="item in lineDescription">
             <span class="summary-cell">
                 {{ item }}
@@ -18,19 +18,23 @@ const props = defineProps({
     },
     maxCellCount: {
         type: Number,
-        default: 4
+        required: true
+    },
+    direction: {
+        type: String,
     }
 })
 
 const lineDescription: Array<Number | string> = lineSummary(props.line)
 const missedBlankCell = props.maxCellCount - lineDescription.length;
-// lineDescription.push(0)
-if (missedBlankCell) {
 
+if (missedBlankCell) {
     for (let index = 1; index <= missedBlankCell; index++) {
         lineDescription.unshift('-')
     }
 }
+
+const directionClass = props.direction == 'vertical' ? 'flex-column' : 'flex-row'
 
 
 </script>
