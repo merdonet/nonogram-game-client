@@ -1,6 +1,6 @@
 <template>
   <v-btn class="cell pa-0" flat variant="outlined" :class="borderColor" rounded="false" @click="onClick">
-    <v-icon :icon="cellStatusIcon" size="3rem"></v-icon>
+    <v-icon :icon="cellStatusIcon" size="3rem" :color="iconColor"></v-icon>
   </v-btn>
 </template>
 
@@ -29,6 +29,8 @@ const cellStatusIcon = computed(() => {
 });
 
 const borderColor = props.success == true ? "cell-success" : "cell-error";
+
+const iconColor = props.status == true ? '#424242' : '#BDBDBD';
 
 const onClick = () => emit("clicked", props.status);
 </script>

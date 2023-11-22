@@ -9,9 +9,9 @@ export const useNonoStore = defineStore("nono", () => {
   const puzzle = reactive([
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
-    [1, 1, 0, 1, 0, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 0, 1, 0],
     [1, 1, 0, 1, 0, 0, 1, 1, 1, 1],
-    [1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 1, 0, 1, 1, 0, 1, 1, 0, 0],
     [0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ]);
@@ -34,8 +34,6 @@ export const useNonoStore = defineStore("nono", () => {
     )
   );
 
-  const maxSummaryLine = computed(() => maxSummaryLength(puzzle));
-
   const cols: Array<number[]> = [];
   const fillColumns = () => {
     for (let index = 0; index <= puzzleWidth.value - 1; index++) {
@@ -55,7 +53,8 @@ export const useNonoStore = defineStore("nono", () => {
 
   const puzzleColumn = (item: number): number[] => cols[item];
 
-  console.log(puzzleColumn(1));
+  const maxSummaryRow = computed(() => maxSummaryLength(puzzle));
+  const maxSummaryColumn = computed(() => maxSummaryLength(cols));
 
   return {
     puzzle,
@@ -63,7 +62,8 @@ export const useNonoStore = defineStore("nono", () => {
     puzzleHeight,
     rowSummaryList,
     puzzleWidth,
-    maxSummaryLine,
+    maxSummaryRow,
+    maxSummaryColumn,
     userSolutionPuzzle,
     puzzleColumns,
     puzzleColumn,

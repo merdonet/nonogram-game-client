@@ -30,7 +30,7 @@ const missedBlankCell = props.maxCellCount - lineDescription.length;
 
 if (missedBlankCell) {
     for (let index = 1; index <= missedBlankCell; index++) {
-        lineDescription.unshift('-')
+        lineDescription.unshift('')
     }
 }
 

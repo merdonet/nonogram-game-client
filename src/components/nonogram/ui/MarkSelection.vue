@@ -1,7 +1,8 @@
 <template>
     <div>
-        <v-switch v-model="selection" color="orange" class="ma-0 pa-0" inset hide-details @update:model-value="onClick" />
-        <CellComponent :status="selection" class="user-selection" />
+        <v-switch v-model="selection" color="blue-darken-4" class="ma-0 pa-0" inset hide-details
+            @update:model-value="onClick" />
+        <CellComponent :status="selection" class="user-selection" @clicked="onCellClick" />
     </div>
 </template>
 
@@ -14,6 +15,9 @@ const selection = ref(false)
 const emit = defineEmits(['selection'])
 
 const onClick = () => emit('selection', selection)
+const onCellClick = (val: boolean) => {
+    selection.value = val
+}
 
 </script>
 

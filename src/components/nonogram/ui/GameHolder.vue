@@ -6,14 +6,13 @@
                     <div class="d-flex flex-row">
                         <template v-for="item in puzzleWidth">
                             <div class="flex-column">
-                                <LineSummary :line="puzzleColumn(item - 1)" :maxCellCount="maxSummaryLine"
+                                <LineSummary :line="puzzleColumn(item - 1)" :maxCellCount="maxSummaryColumn"
                                     direction="vertical" />
                             </div>
                         </template>
                     </div>
-
                 </div>
-                <div class="mt-10 mr-16">
+                <div class="mt-1 mr-16">
                     <MarkSelection @selection="onSelection" />
                 </div>
             </div>
@@ -22,7 +21,7 @@
                     <template v-for="item in puzzleHeight">
                         <div class="d-flex flex-row text-no-wrap">
                             <div class="flex-row-reverse mr-2">
-                                <LineSummary :line="puzzleLine(item - 1)" :maxCellCount="maxSummaryLine" />
+                                <LineSummary :line="puzzleLine(item - 1)" :maxCellCount="maxSummaryRow" />
                             </div>
                             <div>
                                 <template v-for="cell in puzzleLine(item - 1)">
@@ -33,10 +32,7 @@
                     </template>
                 </div>
             </div>
-
         </div>
-
-
     </div>
 </template>
 
@@ -56,6 +52,6 @@ const onCellClick = () => {
     console.log(selection.value)
 }
 
-const { puzzleLine, puzzleHeight, maxSummaryLine, puzzleColumn, puzzleWidth } =
+const { puzzleLine, puzzleHeight, maxSummaryRow, maxSummaryColumn, puzzleColumn, puzzleWidth } =
     useNonoStore();
 </script>
