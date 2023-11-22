@@ -8,7 +8,7 @@ import {
 export const useNonoStore = defineStore("nono", () => {
   const puzzle = reactive([
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
     [1, 1, 0, 1, 0, 0, 1, 0, 1, 1],
     [1, 1, 0, 1, 0, 0, 1, 1, 1, 1],
     [1, 1, 0, 1, 1, 0, 1, 1, 0, 1],
@@ -36,10 +36,10 @@ export const useNonoStore = defineStore("nono", () => {
 
   const maxSummaryLine = computed(() => maxSummaryLength(puzzle));
 
-  const cols: Array<Number[]> = [];
+  const cols: Array<number[]> = [];
   const fillColumns = () => {
     for (let index = 0; index <= puzzleWidth.value - 1; index++) {
-      const col: Number[] = [];
+      const col: number[] = [];
       for (let colIndex = 0; colIndex <= puzzleHeight.value - 1; colIndex++) {
         const aa = puzzle[colIndex][index];
 
@@ -51,7 +51,11 @@ export const useNonoStore = defineStore("nono", () => {
 
   fillColumns();
 
-  const columns = computed(() => cols);
+  const puzzleColumns = () => cols;
+
+  const puzzleColumn = (item: number): number[] => cols[item];
+
+  console.log(puzzleColumn(1));
 
   return {
     puzzle,
@@ -61,6 +65,7 @@ export const useNonoStore = defineStore("nono", () => {
     puzzleWidth,
     maxSummaryLine,
     userSolutionPuzzle,
-    columns,
+    puzzleColumns,
+    puzzleColumn,
   };
 });

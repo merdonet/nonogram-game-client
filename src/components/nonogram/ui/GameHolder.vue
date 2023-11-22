@@ -14,7 +14,7 @@
 
                 </div>
                 <div class="mt-10 mr-16">
-                    <MarkSelection />
+                    <MarkSelection @selection="onSelection" />
                 </div>
             </div>
             <div class="d-flex flex-row-reverse">
@@ -26,7 +26,7 @@
                             </div>
                             <div>
                                 <template v-for="cell in puzzleLine(item - 1)">
-                                    <CellComponent :status="cell == 1" />
+                                    <CellComponent :status="cell == 1" @clicked="onCellClick" />
                                 </template>
                             </div>
                         </div>
@@ -41,8 +41,20 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { CellComponent, MarkSelection, LineSummary } from "..";
 import { useNonoStore } from "../../../store/nonoStore";
+
+const selection = ref(false)
+
+const onSelection = (val: boolean) => {
+    selection.value = val
+}
+
+const onCellClick = () => {
+    // TODO: call store
+    console.log(selection.value)
+}
 
 const { puzzleLine, puzzleHeight, maxSummaryLine, puzzleColumn, puzzleWidth } =
     useNonoStore();

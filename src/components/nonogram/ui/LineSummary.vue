@@ -1,9 +1,9 @@
 <template>
     <div class="d-flex align-center" :class="directionClass">
         <template v-for="item in lineDescription">
-            <span class="summary-cell">
+            <v-btn class="cell pa-0" flat variant="outlined" rounded="false" :ripple="false">
                 {{ item }}
-            </span>
+            </v-btn>
         </template>
     </div>
 </template>
@@ -40,11 +40,18 @@ const directionClass = props.direction == 'vertical' ? 'flex-column' : 'flex-row
 </script>
 <style scoped>
 .summary-cell {
-    border: 1px solid rgb(146, 136, 136);
+    border: 1px solid rgb(209, 207, 207);
     min-width: 50px;
     min-height: 50px;
     line-height: 50px;
     text-align: center;
     vertical-align: middle;
+}
+
+.cell {
+    border: 1px solid rgb(193, 192, 192);
+    min-width: 50px;
+    min-height: 50px;
+    border-width: 2px;
 }
 </style>

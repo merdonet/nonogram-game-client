@@ -37,7 +37,7 @@ const onClick = () => emit("clicked", props.status);
 .cell {
   min-width: 50px;
   min-height: 50px;
-  border-width: 2px;
+  border-width: 1px;
 }
 
 .cell-error {
