@@ -14,7 +14,7 @@ const selection = ref(false)
 
 const emit = defineEmits(['selection'])
 
-const onClick = () => emit('selection', selection)
+const onClick = () => emit('selection', selection.value)
 const onCellClick = (val: boolean) => {
     selection.value = val
 }
