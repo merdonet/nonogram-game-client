@@ -7,7 +7,7 @@ import {
 
 export const useNonoStore = defineStore("nono", () => {
   const puzzle = reactive([
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
     [0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
     [1, 1, 0, 1, 0, 0, 1, 0, 1, 0],
     [1, 1, 0, 1, 0, 0, 1, 1, 1, 1],
@@ -16,19 +16,12 @@ export const useNonoStore = defineStore("nono", () => {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   ]);
 
-  const puzzleLine = (item: number) => puzzle[item];
-
   const puzzleHeight = computed(() => puzzle.length);
-
   const puzzleWidth = computed(() => puzzle[0].length);
+  const puzzleLine = (item: number) => puzzle[item];
+  const puzzleColumn = (item: number): number[] => cols[item];
 
-  const rowSummaryList = computed(() => {
-    return puzzle.map((rowList: number[]) => {
-      return lineSummary(rowList);
-    });
-  });
-
-  const userSolutionPuzzle = reactive(
+  const userSolutionPuzzle: Array<Array<number | undefined>> = reactive(
     [...Array(puzzleHeight.value)].map(() =>
       [...Array(puzzleWidth.value)].map(() => undefined)
     )
@@ -40,21 +33,31 @@ export const useNonoStore = defineStore("nono", () => {
       const col: number[] = [];
       for (let colIndex = 0; colIndex <= puzzleHeight.value - 1; colIndex++) {
         const aa = puzzle[colIndex][index];
-
         col.push(aa);
       }
       cols.push(col);
     }
   };
-
   fillColumns();
 
   const puzzleColumns = () => cols;
 
-  const puzzleColumn = (item: number): number[] => cols[item];
+  const rowSummaryList = computed(() => {
+    return puzzle.map((rowList: number[]) => {
+      return lineSummary(rowList);
+    });
+  });
 
   const maxSummaryRow = computed(() => maxSummaryLength(puzzle));
   const maxSummaryColumn = computed(() => maxSummaryLength(cols));
+
+  const updateSolution = (
+    row: number,
+    column: number,
+    val: number | undefined
+  ) => {
+    userSolutionPuzzle[row][column] = val;
+  };
 
   return {
     puzzle,
@@ -67,5 +70,6 @@ export const useNonoStore = defineStore("nono", () => {
     userSolutionPuzzle,
     puzzleColumns,
     puzzleColumn,
+    updateSolution,
   };
 });

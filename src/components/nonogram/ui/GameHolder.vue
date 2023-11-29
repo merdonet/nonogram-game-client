@@ -2,7 +2,7 @@
     <div>
         <div class="d-flex flex-column bg-surface">
             <div class="d-flex flex-row-reverse">
-                <div class=" ma-2 pa-2 mb-0 pb-0">
+                <div class="ma-2 pa-2 mb-0 pb-0">
                     <div class="d-flex flex-row">
                         <template v-for="item in puzzleWidth">
                             <div class="flex-column">
@@ -18,14 +18,14 @@
             </div>
             <div class="d-flex flex-row-reverse">
                 <div class="ma-2 pa-2 mt-0">
-                    <template v-for="item in puzzleHeight">
+                    <template v-for="(item, rowindex) in puzzleHeight">
                         <div class="d-flex flex-row text-no-wrap">
                             <div class="flex-row-reverse mr-2">
                                 <LineSummary :line="puzzleLine(item - 1)" :maxCellCount="maxSummaryRow" />
                             </div>
                             <div>
-                                <template v-for="cell in puzzleLine(item - 1)">
-                                    <CellComponent :status="cell == 1" @clicked="onCellClick" />
+                                <template v-for="(cell, colIndex) in puzzleLine(item - 1)">
+                                    <CellComponent :status="cell == 1" @clicked="onCellClick(rowindex, colIndex)" />
                                 </template>
                             </div>
                         </div>
@@ -41,17 +41,25 @@ import { ref } from "vue";
 import { CellComponent, MarkSelection, LineSummary } from "..";
 import { useNonoStore } from "../../../store/nonoStore";
 
-const selection = ref(false)
+let selection = ref(false);
 
 const onSelection = (val: boolean) => {
-    selection.value = val
-}
+    selection.value = val;
+};
 
-const onCellClick = () => {
-    // TODO: call store
-    console.log(selection.value)
-}
+const onCellClick = (rowindex: number, colIndex: number) => {
+    updateSolution(rowindex, colIndex, selection.value == true ? 1 : 0)
+};
 
-const { puzzleLine, puzzleHeight, maxSummaryRow, maxSummaryColumn, puzzleColumn, puzzleWidth } =
-    useNonoStore();
+const {
+    puzzleLine,
+    puzzleHeight,
+    maxSummaryRow,
+    maxSummaryColumn,
+    puzzleColumn,
+    puzzleWidth,
+    updateSolution,
+    // solutionLine,
+    // solutionColumn,
+} = useNonoStore();
 </script>
