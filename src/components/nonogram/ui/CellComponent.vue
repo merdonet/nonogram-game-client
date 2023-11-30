@@ -15,7 +15,7 @@ const props = defineProps({
   },
   status: {
     type: Boolean as PropType<CellStatus>,
-    default: false,
+    default: undefined,
   },
 });
 
@@ -30,7 +30,7 @@ const cellStatusIcon = computed(() => {
 
 const borderColor = props.success == true ? "cell-success" : "cell-error";
 
-const iconColor = props.status == true ? '#424242' : '#BDBDBD';
+const iconColor = props.status == true ? '#37474F' : '#BDBDBD';
 
 const onClick = () => emit("clicked", props.status);
 </script>

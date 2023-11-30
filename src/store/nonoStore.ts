@@ -7,14 +7,30 @@ import {
 
 export const useNonoStore = defineStore("nono", () => {
   const puzzle = reactive([
-    [0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
-    [0, 0, 1, 0, 0, 0, 0, 0, 1, 1],
-    [1, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1],
-    [1, 1, 0, 1, 1, 0, 1, 1, 0, 0],
-    [0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1],
+    [0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1],
+    [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1],
+    [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1],
+    [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1],
   ]);
+
+  // const puzzle = reactive([
+  //   [0, 0, 0, 1, 1],
+  //   [0, 0, 1, 0, 0],
+  //   [1, 1, 0, 1, 0],
+  //   [1, 1, 0, 1, 0],
+  //   [1, 1, 0, 1, 0],
+  // ]);
 
   const puzzleHeight = computed(() => puzzle.length);
   const puzzleWidth = computed(() => puzzle[0].length);
@@ -51,14 +67,6 @@ export const useNonoStore = defineStore("nono", () => {
   const maxSummaryRow = computed(() => maxSummaryLength(puzzle));
   const maxSummaryColumn = computed(() => maxSummaryLength(cols));
 
-  const updateSolution = (
-    row: number,
-    column: number,
-    val: number | undefined
-  ) => {
-    userSolutionPuzzle[row][column] = val;
-  };
-
   return {
     puzzle,
     puzzleLine,
@@ -70,6 +78,5 @@ export const useNonoStore = defineStore("nono", () => {
     userSolutionPuzzle,
     puzzleColumns,
     puzzleColumn,
-    updateSolution,
   };
 });

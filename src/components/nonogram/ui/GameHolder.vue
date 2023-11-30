@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="d-flex flex-column bg-surface">
-            <div class="d-flex flex-row-reverse">
+            <div class="d-flex flex-row-reverse align-end">
                 <div class="ma-2 pa-2 mb-0 pb-0">
                     <div class="d-flex flex-row">
                         <template v-for="item in puzzleWidth">
@@ -12,9 +12,10 @@
                         </template>
                     </div>
                 </div>
-                <div class="mt-1 mr-16">
-                    <MarkSelection @selection="onSelection" />
+                <div class="justify-center align-center">
+                    <MarkSelection :lives="getLives" @selection="onSelection" />
                 </div>
+
             </div>
             <div class="d-flex flex-row-reverse">
                 <div class="ma-2 pa-2 mt-0">
@@ -24,8 +25,9 @@
                                 <LineSummary :line="puzzleLine(item - 1)" :maxCellCount="maxSummaryRow" />
                             </div>
                             <div>
-                                <template v-for="(cell, colIndex) in puzzleLine(item - 1)">
-                                    <CellComponent :status="cell == 1" @clicked="onCellClick(rowindex, colIndex)" />
+                                <template v-for="(_, colIndex) in puzzleLine(item - 1)">
+                                    <CellComponent :status="cellStatus(rowindex, colIndex)"
+                                        @clicked="onCellClick(rowindex, colIndex)" />
                                 </template>
                             </div>
                         </div>
@@ -40,6 +42,7 @@
 import { ref } from "vue";
 import { CellComponent, MarkSelection, LineSummary } from "..";
 import { useNonoStore } from "../../../store/nonoStore";
+import { useSolutionStore } from "../../../store/solutionStore";
 
 let selection = ref(false);
 
@@ -51,6 +54,10 @@ const onCellClick = (rowindex: number, colIndex: number) => {
     updateSolution(rowindex, colIndex, selection.value == true ? 1 : 0)
 };
 
+const cellStatus = (rowindex: number, colIndex: number) => {
+    return solution[rowindex][colIndex]
+}
+
 const {
     puzzleLine,
     puzzleHeight,
@@ -58,8 +65,9 @@ const {
     maxSummaryColumn,
     puzzleColumn,
     puzzleWidth,
-    updateSolution,
-    // solutionLine,
-    // solutionColumn,
 } = useNonoStore();
+
+const { getLives, solution, updateSolution } = useSolutionStore();
+
+
 </script>
