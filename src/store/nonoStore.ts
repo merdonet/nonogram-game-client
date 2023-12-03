@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { Puzzle, PuzzleLine, SolutionPuzzle } from "./types";
+import { makeColumnArray } from "./utility";
 import { computed, reactive, ToRef } from "vue";
 import {
   lineSummary,
@@ -36,7 +37,7 @@ export const useNonoStore = defineStore("nono", () => {
   const puzzleHeight = computed(() => puzzle.length);
   const puzzleWidth = computed(() => puzzle[0].length);
   const puzzleLine = (item: number): PuzzleLine => puzzle[item];
-  const puzzleColumn = (item: number): PuzzleLine => cols[item];
+  const puzzleColumn = (item: number): PuzzleLine => puzzleColumns[item];
 
   const userSolutionPuzzle: SolutionPuzzle = reactive(
     [...Array(puzzleHeight.value)].map(() =>
@@ -44,20 +45,11 @@ export const useNonoStore = defineStore("nono", () => {
     )
   );
 
-  const cols: Puzzle = [];
-  const fillColumns = (): void => {
-    for (let index = 0; index <= puzzleWidth.value - 1; index++) {
-      const col: number[] = [];
-      for (let colIndex = 0; colIndex <= puzzleHeight.value - 1; colIndex++) {
-        const aa = puzzle[colIndex][index];
-        col.push(aa);
-      }
-      cols.push(col);
-    }
-  };
-  fillColumns();
-
-  const puzzleColumns = () => cols;
+  const puzzleColumns = makeColumnArray(
+    puzzle,
+    puzzleWidth.value,
+    puzzleHeight.value
+  );
 
   const rowSummaryList: ToRef<Puzzle> = computed(() => {
     return puzzle.map((rowList: number[]) => {
@@ -66,7 +58,7 @@ export const useNonoStore = defineStore("nono", () => {
   });
 
   const maxSummaryRow = computed(() => maxSummaryLength(puzzle));
-  const maxSummaryColumn = computed(() => maxSummaryLength(cols));
+  const maxSummaryColumn = computed(() => maxSummaryLength(puzzleColumns));
 
   return {
     puzzle,

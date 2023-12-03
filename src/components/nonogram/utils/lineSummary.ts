@@ -11,7 +11,10 @@ const lineSummary = (list: number[]) => {
   }, []);
 };
 
-const compare = (list1: number[], list2: number[]) => {
+const compare = (
+  list1: Array<number | undefined>,
+  list2: Array<number | undefined>
+) => {
   if (list1.length != list2.length) return false;
   const result: Array<number | boolean> = [];
   list1.forEach((item, index) => {
