@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { SolutionPuzzle } from "./types";
 import { useNonoStore } from "./nonoStore";
 
 import { computed, reactive, ref } from "vue";
@@ -8,7 +9,7 @@ export const useSolutionStore = defineStore("solution", () => {
 
   const lives = ref<number>(3);
 
-  const solution: Array<Array<number | undefined>> = reactive(
+  const solution: SolutionPuzzle = reactive(
     [...Array(puzzleHeight)].map(() =>
       [...Array(puzzleWidth)].map(() => undefined)
     )
@@ -22,7 +23,7 @@ export const useSolutionStore = defineStore("solution", () => {
     row: number,
     column: number,
     val: number | undefined
-  ) => {
+  ): void => {
     if (solution[row][column] == val) {
       solution[row][column] = undefined;
       return;
